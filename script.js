@@ -11,7 +11,7 @@ let formsOfEntertainment = ['reading a book or two of your choice.', 'binge watc
 'pacing aimlessly while calling all the people you should have checked up on during quarantine.'];
 
 function randomlySelectFromArray(array){
-
+    return array[Math.floor(array.length * Math.random())];
 }
 
 
