@@ -13,7 +13,6 @@ function runProgram(){
     let formsOfEntertainment = ['reading a book or two of your choice', 'binge watching Avatar: The Last Airbender', 'surfing... the web',
     'calling all the people you should have checked up on during quarantine'];
     let formOfEntertainment;
-    let userInput = '';
 
     function randomlySelectFromArray(array){
         return array[Math.floor(array.length * Math.random())];
@@ -26,42 +25,47 @@ function runProgram(){
         formOfEntertainment = randomlySelectFromArray(formsOfEntertainment);
     }
     
-    function reroll(){
-        if (userInput.includes('1')){
-            destination = randomlySelectFromArray(destinations);
-        }
-        if (userInput.includes('2')){
-            sourceOfFood = randomlySelectFromArray(sourcesOfFood);
-        }
-        if (userInput.includes('3')){
-            modeOfTransportation = randomlySelectFromArray(modesOfTransportation);
-        }
-        if (userInput.includes('4')){
-            formOfEntertainment = randomlySelectFromArray(formsOfEntertainment);
-        }
-    }
-    
-    function confirm(){
-        userInput = prompt(`Following are your current selections:
-(1) Destination -- ${destination}
+    function interactWithUser(){
+        let userInput = '';
+        let currentSelections;
+        function setCurrentSelections(){
+            currentSelections = `(1) Destination -- ${destination}
 (2) Source of food -- ${sourceOfFood}
 (3) Mode of transportation -- ${modeOfTransportation}
-(4) Form of entertainment -- ${formOfEntertainment}
+(4) Form of entertainment -- ${formOfEntertainment}`;
+        }
+        setCurrentSelections();
+        
+        function reroll(){
+            if (userInput.includes('1')){
+                destination = randomlySelectFromArray(destinations);
+            }
+            if (userInput.includes('2')){
+                sourceOfFood = randomlySelectFromArray(sourcesOfFood);
+            }
+            if (userInput.includes('3')){
+                modeOfTransportation = randomlySelectFromArray(modesOfTransportation);
+            }
+            if (userInput.includes('4')){
+                formOfEntertainment = randomlySelectFromArray(formsOfEntertainment);
+            }
+            setCurrentSelections();
+        }
+        
+        function confirm(){
+            userInput = prompt(`Following are your current selections:
+${currentSelections}
 
 When you are ready to CONFIRM and finalize these selections,
 continue without entering anything below.
 
-If you would like any of the selections to be randomly selected again, enter below the numbers for what you would like changed.
+To randomize selections again, enter below the numbers for what you would like changed.
 e.g. If you would like to change Source of food, Mode of transporation, and Form of entertainment, enter: 234`)
-    }
-    
-    function interactWithUser(){
+        }
+
         userInput = prompt(`Random selections have been made for the contents of your day trip.
 The current selections are as follows:
-(1) Destination -- ${destination}
-(2) Source of food -- ${sourceOfFood}
-(3) Mode of transportation -- ${modeOfTransportation}
-(4) Form of entertainment -- ${formOfEntertainment}
+${currentSelections}
 
 If you would like any of the selections to be randomly selected again, enter below the numbers for what you would like changed.
 e.g. If you would like to change Destination and Form of entertainment, enter: 14
@@ -80,11 +84,11 @@ If you are content with the current selections, enter nothing and continue.`);
     function displayFinalMessage(){
         console.log(`Day Trip Confirmation Details:
 
-You will be spending the day in ${destination}.
-Under normal circumstances you might eat at a restaurant or two on a day trip, but given the current circumstances...
-Utilizing pickup or your preferred method of delivery, you'll be ordering from ${sourceOfFood}.
-You'll be getting around using ${modeOfTransportation}.
-For entertainment, you will be ${formOfEntertainment}.
+- You will be spending the day in ${destination}.
+- Under normal circumstances you might eat at a restaurant or two on a day trip, but given the current circumstances...
+  Utilizing pickup or your preferred method of delivery, you'll be getting your food from ${sourceOfFood}.
+- You'll be getting around using ${modeOfTransportation}.
+- For entertainment, you will be ${formOfEntertainment}.
 
 Thank you for choosing my little script to help you plan your trip. Enjoy!` +
 "\n\n\n\n\nDisclaimer: Day Trip Planning Services is neither required nor expected to supply clients with means of travel, dining, or entertainment.")
